@@ -1,10 +1,56 @@
 <script setup lang="ts">
-const { data } = await useFetch("/api/users");
+const route = useRoute();
+const router = useRouter();
+const limit = computed(() => Number(route.query.limit) || 6);
+const search = computed({
+  get: () => String(route.query.search ?? ""),
+  set: (value: string) => {
+    router.replace({
+      query: {
+        ...route.query,
+        search: value || undefined,
+      },
+    });
+  },
+});
+
+const { data } = await useFetch(`/api/users`, {
+  query: {
+    search: search,
+    limit: limit,
+  },
+});
 const users = computed(() => data.value?.data || []);
 const showAll = ref(false);
 </script>
 
 <template>
+  <div class="flex gap-5">
+    <h1>Filter</h1>
+    <input
+      class="border mb-2 px-3 py-2"
+      type="text"
+      placeholder="Search"
+      v-model="search"
+    />
+    <select
+      class="border mb-2 px-3 py-2"
+      name="limit"
+      :value="limit"
+      @change="
+        router.replace({
+          query: {
+            ...route.query,
+            limit: ($event.target as HTMLSelectElement).value || undefined,
+          },
+        })
+      "
+      id=""
+    >
+      <option>6</option>
+      <option>10</option>
+    </select>
+  </div>
   <table>
     <thead>
       <tr>

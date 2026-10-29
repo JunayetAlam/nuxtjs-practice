@@ -7,13 +7,14 @@ const getUsers = async (query?: Record<string, unknown>) => {
   const searchParams = query?.search
     ? query.search.toString().toLowerCase()
     : "";
-  let usersList = users.slice(skip, skip + limit);
-
+  let usersList = users;
   if (searchParams) {
     usersList = usersList.filter((user) =>
       user.name.toLowerCase().includes(searchParams),
     );
   }
+
+  usersList = usersList.slice(skip, skip + limit);
 
   return {
     data: usersList,
