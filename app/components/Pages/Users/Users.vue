@@ -21,7 +21,7 @@ const showAll = ref(false);
       <tr v-for="(item, index) in users" :key="index">
         <td>
           <div class="flex gap-5">
-            <img :src="item.avatar" class="size-14 rounded-full" alt="" />
+            <NuxtImg :src="item.avatar" class="size-14 rounded-full" alt="" />
             <div>
               <h2 class="text-xl font-medium">{{ item.name }}</h2>
               <p>{{ item.username }}</p>
