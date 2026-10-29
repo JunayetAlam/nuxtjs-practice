@@ -5,6 +5,6 @@
     <NuxtLink to="/">Home</NuxtLink>
     <NuxtLink to="/users">Users</NuxtLink>
     <NuxtLink to="/about">About</NuxtLink>
-    <NuxtLink to="/login">Login</NuxtLink>
+    <NuxtLink to="/auth/login">Login</NuxtLink>
   </nav>
 </template>

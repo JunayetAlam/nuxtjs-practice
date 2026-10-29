@@ -1,0 +1,4 @@
+<template>
+  <GlobalNavbar />
+  <slot />
+</template>
