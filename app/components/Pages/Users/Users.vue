@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { users } from "~/data/users";
-
+const { data } = await useFetch("/api/users");
+const users = computed(() => data.value?.data || []);
 const showAll = ref(false);
 </script>
 
